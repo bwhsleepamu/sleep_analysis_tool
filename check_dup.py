@@ -1,13 +1,15 @@
+
+# check if there is duplicate spn in the unfilled outputfrom collections import OrderedDict
 from collections import OrderedDict
 import csv
-import time
 folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627/data_all/output_20180713-144743/"
-inputfile = folderpath + "output_unfilled_part2.csv"
+inputfile = folderpath + "output_unfilled.csv"
+
 
 # this function is to fill all the data of the missing SPn
 
 # a dictionary to hold all the rows
-# key: subject code values: list of lists
+# key: subject code values: list of lists / list of rows
 # e.g., D['3319GX'] = [[1,106,,,], [2,20.5,,,], [3,80.5,,,]]
 D = OrderedDict()
 
@@ -24,36 +26,27 @@ with open(inputfile, 'r') as f:
     # process by subject code
     if linelist[0] not in sublist:
       sublist.append(linelist[0])
-      # initialize the list to be the value of D[key]
+      # initialize the list to be the value of D[subjectcode]
       D[linelist[0]]=[]
     D[linelist[0]].append(linelist[1:])
   
 for x in sublist:
 #    start = int(D[x][0][0])     
-    cur = 1
+    cur = 0
+    spnlist = []
     # for looping D[x] all SPn's
     for idx, val in enumerate(D[x]):
-      try:
-        if cur != int(val[0]):
-         toadd=[cur, ".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".",".","."]
-         D[x].insert(idx,toadd)
-      except:
-        print val
-      cur += 1
-      
+      # val[0] is the SPn of the row
+      spnlist.append(int(val[0]))
+    
+    for idx, spn in enumerate(spnlist):
+      if idx==0:
+        prev = spn
+      else:
+        if prev==spn:
+          print "dup!"
+          print x, spn
+        prev = spn
 
-##print D['3319GX']
-
-
-timestr = time.strftime("%Y%m%d-%H%M%S")
-with open(folderpath + timestr + "_" + "output_filled_part2.csv", 'wb') as out:
-     
-    for x in sublist:
-      for row in D[x]:
-        
-        writer = csv.writer(out)
-      
-        out.write(x + ",")
-        writer.writerow(row)
-
+          
 

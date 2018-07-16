@@ -126,7 +126,7 @@ for filename in csv_files:
         adict["NWake_5"].append(func.getNWake(newU,5))
         adict["Lout2Lon"].append(func.getLout2Lon(newU))
         
-        # 2 more columns:
+        # adding 2 more columns:
         lastslp = func.SleepStageB49(newU)
         if lastslp == None:
           adict["LastSlp"].append(".")
@@ -139,9 +139,9 @@ for filename in csv_files:
         else:
           adict["LastSlp_before_finalwake"].append(lastslpfw)
 
-
+timestr = time.strftime("%Y%m%d-%H%M%S")
 ## write to output
-with open(outputpath + "output_unfilled.csv", "wb") as outfile:
+with open(outputpath + "timestr_"+ "output_unfilled.csv", "wb") as outfile:
     writer = csv.writer(outfile)
     writer.writerow(adict.keys())
     export_data = zip_longest(*adict.values(), fillvalue = "")
