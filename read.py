@@ -139,9 +139,8 @@ for filename in csv_files:
         else:
           adict["LastSlp_before_finalwake"].append(lastslpfw)
 
-timestr = time.strftime("%Y%m%d-%H%M%S")
 ## write to output
-with open(outputpath + "timestr_"+ "output_unfilled.csv", "wb") as outfile:
+with open(outputpath + "output_unfilled.csv", "wb") as outfile:
     writer = csv.writer(outfile)
     writer.writerow(adict.keys())
     export_data = zip_longest(*adict.values(), fillvalue = "")
