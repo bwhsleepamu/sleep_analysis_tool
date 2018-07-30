@@ -18,7 +18,7 @@ except ImportError:
     from itertools import izip_longest as zip_longest
 
 # multiple files:
-inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627/data_missed/"
+inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180727/"
 csv_files = glob.glob(inputpath+"*.csv")
 
 
@@ -68,9 +68,10 @@ for filename in csv_files:
     ind8 = [i for i, x in enumerate(sleepstate) if x == 8]
     ind9 = [i for i, x in enumerate(sleepstate) if x == 9]
     if len(ind8) != len(ind9):
-        print filename + " with lights  out/on issue" 
-        print ind8
-        print ind9
+        print os.path.basename(filename)
+        # print os.path.basename(filename) + " with lights  out/on issue" 
+        # print ind8
+        # print ind9
 ##    else:
 ##        print filename
 #    for a,b in zip(ind8,ind9):
