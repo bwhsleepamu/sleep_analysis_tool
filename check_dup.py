@@ -2,8 +2,9 @@
 
 from collections import OrderedDict
 import csv
-folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627/data_all/output_20180713-144743/"
-inputfile = folderpath + "output_unfilled.csv"
+#folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627/data_all/output_20180713-144743/"
+folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_2/output_20180803-140322/"
+inputfile = folderpath + "output_unfilled_part1.csv"
 
 
 # this function is to fill all the data of the missing SPn
@@ -17,7 +18,7 @@ D = OrderedDict()
 sublist = []
 
 with open(inputfile, 'r') as f:
-  next(f)
+  # next(f)
   # read each line of file
   for line in f:
     # get a list out of each row

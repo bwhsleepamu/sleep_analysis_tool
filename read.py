@@ -31,7 +31,8 @@ class Data(object):
         self.pointer = pointer   
 
 # multiple files:
-inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180727/"
+# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180802/"
+inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_2/"
 csv_files = glob.glob(inputpath+"*.csv")
 
 ### testing file: 

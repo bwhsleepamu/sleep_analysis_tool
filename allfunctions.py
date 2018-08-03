@@ -116,7 +116,8 @@ def getFinalWake(L):
 # input: a list of sleep states
 # output: float (minutes)
 def getLout2Lon(L):
-  return (len(L)-1)/2.0/60.0 # fixed -> from minutes to hours
+  a = (len(L)-1)/2.0/60 # fixed -> from minutes to hours
+  return round(a,2)
 
 # first extra column
 # sleep stage for the epoch just before each 9
