@@ -12,8 +12,7 @@ def getDataValue(L):
 # getting the latS1, latS2, ...
 # input: a list of sleep state, and target sleep state 
 # output: float / "."
-
-
+# fixed: return "." if there is 0 in stages
 def getLat(unit, sleepstate):
 #    next((unit.index(i) for i in unit if i.value==1), None)/2.0
     lat = next((unit.index(i) for i in unit if i.value==sleepstate), None)
