@@ -13,13 +13,16 @@ def getDataValue(L):
 # input: a list of sleep state, and target sleep state 
 # output: float / "."
 # fixed: return "." if there is 0 in stages
-def getLat(unit, sleepstate):
-#    next((unit.index(i) for i in unit if i.value==1), None)/2.0
-    lat = next((unit.index(i) for i in unit if i.value==sleepstate), None)
+def getLat(L, sleepstate):
+    
+    lat = next((L.index(i) for i in L if i==sleepstate), None)
     if lat is None:
       return "."
     else:
-      return lat/2.0
+      if 0 in L[:lat]:
+        return "."
+      else:
+        return lat/2.0
 
 # getting the index of 
 # the first epoch of 20 consecutive epoch

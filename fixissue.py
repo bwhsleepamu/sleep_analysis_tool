@@ -50,7 +50,7 @@ for column_name in output_header:
 
 for filename in csv_files:
     # read from files
-#    print filename
+    print filename
     with open(filename, 'r') as f:
         columns = defaultdict(list)
         # read rows into a dictionary format
@@ -74,33 +74,44 @@ for filename in csv_files:
     ind8 = [i for i, x in enumerate(sleepstate) if x == 8]
     ind9 = [i for i, x in enumerate(sleepstate) if x == 9]
 
-#     if len(ind8) != len(ind9):
-#         # # print os.path.basename(filename)
-#         print os.path.basename(filename) + " with lights  out/on issue" 
-#         print ind8
-#         print ind9
-#     else:
-# # #        print filename
-# #    for a,b in zip(ind8,ind9):
-# #        if a>b:
-# #          print filename
-# #          break
-       
-#        for a,b in zip(ind8,ind9):
-#            if a>b:
-#                print filename
-#                print a,b
-#                print WPSP[a], WPSP[b]
-
-##            else:
-##              print  
-#                     
-#            if a > b or prevb > a:
-#               print a, b
-#               print WPSP[a], WPSP[b]
-#            prevb = b
-#                          
-       
-#    print filename
-#    print ind8
-#    print ind9
+    for a,b in zip(ind8,ind9):
+        for i in range(a,b+1):
+            slp_unit.append(Data(sleepstate[i], i)) # appending sleep stages
+        slp_list.append(slp_unit) # slp_list: [Data1,Data2, Data3, ...]
+        slp_unit=[]
+    
+    for unit in slp_list:
+            
+        spn = int(columns['WPSP'][unit[0].pointer])
+        if spn < 0:
+            # replace lights out time with scheduled sleep offset
+            # find next positive Spn
+            # print unit[0].pointer
+            indof8 = unit[0].pointer
+            # print indof8
+            # print columns['WPSP'][unit[0].pointer]
+            while True:
+                indof8 += 1
+                if columns['WPSP'][indof8] > 0:
+                    unit[0].resetData(int(columns['sleepstate'][indof8]),indof8)
+                    break
+                # print unit[0].pointer
+                # print unit[0].value
+        # checking spn of 9
+        spn9 = int(columns['WPSP'][unit[-1].pointer])
+        if spn9 < 0:
+            # replace lights out time with scheduled sleep offset
+            # find next positive Spn
+            # print unit[0].pointer
+            indof9 = unit[-1].pointer
+            # print indof8
+            # print columns['WPSP'][unit[0].pointer]
+            while True:
+                indof9 -= 1
+                if columns['WPSP'][indof9] > 0:
+                    unit[-1].resetData(int(columns['sleepstate'][indof9]),indof9)
+                    break
+        newU = func.getDataValue(unit)
+        # print newU[0]
+        if 0 in newU:
+            print "0"

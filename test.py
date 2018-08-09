@@ -23,3 +23,28 @@ def getPS (L):
 # testing gitignore file
 
 
+class Data(object):
+    value=0
+    pointer=-1
+
+    def __init__(self, value, pointer):
+        self.value = value
+        self.pointer = pointer   
+
+def getLat(L, sleepstate):
+    
+    lat = next((L.index(i) for i in L if i==sleepstate), None)
+    if lat is None:
+      return "."
+    else:
+      if 0 in L[:lat]:
+        return "."
+      else:
+        return lat/2.0
+
+L = [8,2,2,2,0,3,3,3]
+print getLat(L,2)
+print getLat(L,3)
+
+if "." <= 3:
+  print True

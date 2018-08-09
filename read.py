@@ -103,7 +103,6 @@ for filename in csv_files:
         if spn < 0:
             # replace lights out time with scheduled sleep offset
             # find next positive Spn
-            # print unit[0].pointer
             indof8 = unit[0].pointer
             # print indof8
             # print columns['WPSP'][unit[0].pointer]
@@ -112,8 +111,20 @@ for filename in csv_files:
                 if columns['WPSP'][indof8] > 0:
                     unit[0].resetData(int(columns['sleepstate'][indof8]),indof8)
                     break
-                # print unit[0].pointer
-                # print unit[0].value
+        # checking spn of 9
+        spn9 = int(columns['WPSP'][unit[-1].pointer])
+        if spn9 < 0:
+            # replace lights out time with scheduled sleep offset
+            # find next positive Spn
+            # print unit[0].pointer
+            indof9 = unit[-1].pointer
+            # print indof8
+            # print columns['WPSP'][unit[0].pointer]
+            while True:
+                indof9 -= 1
+                if columns['WPSP'][indof9] > 0:
+                    unit[-1].resetData(int(columns['sleepstate'][indof9]),indof9)
+                    break
 
         # making the Data.value into a new list
         # newU is [8,,,,9] or [5,,,,,9]
@@ -124,12 +135,12 @@ for filename in csv_files:
 #        if int(columns['WPSP'][unit[1].pointer]) <0:
 #          print columns['subject'][unit[1].pointer], int(columns['WPSP'][unit[1].pointer])
         adict["SPn"].append(abs(int(columns['WPSP'][unit[0].pointer])))
-        adict["latS1"].append(func.getLat(unit, 1))
-        adict["latS2"].append(func.getLat(unit, 2))
-        adict["latREM"].append(func.getLat(unit, 6))
+        adict["latS1"].append(func.getLat(newU, 1))
+        adict["latS2"].append(func.getLat(newU, 2))
+        adict["latREM"].append(func.getLat(newU, 6))
         # checking if 3 appears before 4        
-        if func.getLat(unit, 3)<=func.getLat(unit, 4):
-          adict["latSWS"].append(func.getLat(unit, 3))
+        if func.getLat(unit, 3)<=func.getLat(newU, 4):
+          adict["latSWS"].append(func.getLat(newU, 3))
         else:
           adict["latSWS"].append(func.getLat(unit, 4)) 
 
