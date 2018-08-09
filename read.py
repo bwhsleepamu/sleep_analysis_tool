@@ -28,11 +28,15 @@ class Data(object):
 
     def __init__(self, value, pointer):
         self.value = value
-        self.pointer = pointer   
+        self.pointer = pointer
+
+    def resetData(self, value, pointer):
+        self.value = value
+        self.pointer = pointer    
 
 # multiple files:
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180802/"
-inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_2/"
+inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
 csv_files = glob.glob(inputpath+"*.csv")
 
 ### testing file: 
@@ -86,22 +90,40 @@ for filename in csv_files:
     
     for a,b in zip(ind8,ind9):
         for i in range(a,b+1):
-          slp_unit.append(Data(sleepstate[i], i))
-        slp_list.append(slp_unit)
+          slp_unit.append(Data(sleepstate[i], i)) # appending sleep stages
+        slp_list.append(slp_unit) # slp_list: [Data1,Data2, Data3, ...]
         slp_unit=[]
 
 
     # index of each first occured sleep state
     # then calculate latency (/2.0)
     for unit in slp_list:
+        
+        spn = int(columns['WPSP'][unit[0].pointer])
+        if spn < 0:
+            # replace lights out time with scheduled sleep offset
+            # find next positive Spn
+            # print unit[0].pointer
+            indof8 = unit[0].pointer
+            # print indof8
+            # print columns['WPSP'][unit[0].pointer]
+            while True:
+                indof8 += 1
+                if columns['WPSP'][indof8] > 0:
+                    unit[0].resetData(int(columns['sleepstate'][indof8]),indof8)
+                    break
+                # print unit[0].pointer
+                # print unit[0].value
+
         # making the Data.value into a new list
+        # newU is [8,,,,9] or [5,,,,,9]
         newU = func.getDataValue(unit)
 
         adict["Subject"].append(columns['subject'][unit[1].pointer])
 #        adict["SPn"].append(abs(int(columns['WPSP'][unit[0].pointer])))
 #        if int(columns['WPSP'][unit[1].pointer]) <0:
 #          print columns['subject'][unit[1].pointer], int(columns['WPSP'][unit[1].pointer])
-        adict["SPn"].append(abs(int(columns['WPSP'][unit[2].pointer])))
+        adict["SPn"].append(abs(int(columns['WPSP'][unit[0].pointer])))
         adict["latS1"].append(func.getLat(unit, 1))
         adict["latS2"].append(func.getLat(unit, 2))
         adict["latREM"].append(func.getLat(unit, 6))

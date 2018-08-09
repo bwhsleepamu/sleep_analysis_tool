@@ -1,5 +1,6 @@
 # to find the problem with files 
 # check if they have the right lights out/on sequences
+
 import csv
 from collections import defaultdict
 from collections import OrderedDict
@@ -17,11 +18,9 @@ except ImportError:
     # Python 2
     from itertools import izip_longest as zip_longest
 
-# multiple files:
-inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180802/"
-csv_files = glob.glob(inputpath+"*.csv")
-
-
+# A Data object holds 2 properties:
+# 1. value (str)
+# 2. original position 
 
 class Data(object):
     value=0
@@ -30,7 +29,14 @@ class Data(object):
     def __init__(self, value, pointer):
         self.value = value
         self.pointer = pointer   
+    
+    def resetData(self, value, pointer):
+        self.value = value
+        self.pointer = pointer 
 
+# multiple files:
+inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
+csv_files = glob.glob(inputpath+"*.csv")
 
 # dictionary for the final output
 adict = OrderedDict()
@@ -67,23 +73,24 @@ for filename in csv_files:
 
     ind8 = [i for i, x in enumerate(sleepstate) if x == 8]
     ind9 = [i for i, x in enumerate(sleepstate) if x == 9]
-    if len(ind8) != len(ind9):
-        # # print os.path.basename(filename)
-        print os.path.basename(filename) + " with lights  out/on issue" 
-        print ind8
-        print ind9
-    else:
-# #        print filename
-#    for a,b in zip(ind8,ind9):
-#        if a>b:
-#          print filename
-#          break
+
+#     if len(ind8) != len(ind9):
+#         # # print os.path.basename(filename)
+#         print os.path.basename(filename) + " with lights  out/on issue" 
+#         print ind8
+#         print ind9
+#     else:
+# # #        print filename
+# #    for a,b in zip(ind8,ind9):
+# #        if a>b:
+# #          print filename
+# #          break
        
-       for a,b in zip(ind8,ind9):
-           if a>b:
-               print filename
-               print a,b
-               print WPSP[a], WPSP[b]
+#        for a,b in zip(ind8,ind9):
+#            if a>b:
+#                print filename
+#                print a,b
+#                print WPSP[a], WPSP[b]
 
 ##            else:
 ##              print  
@@ -98,3 +105,41 @@ for filename in csv_files:
 #    print ind8
 #    print ind9
 
+    for a,b in zip(ind8,ind9):
+        for i in range(a,b+1):
+            slp_unit.append(Data(sleepstate[i], i)) # appending sleep stages
+        slp_list.append(slp_unit) # slp_list: [Data1,Data2, Data3, ...]
+        slp_unit=[]
+    
+    for unit in slp_list:
+        
+    #     newU = func.getDataValue(unit)
+        # print unit[0].pointer
+        spn = int(columns['WPSP'][unit[0].pointer])
+        if spn < 0:
+            # replace lights out time with scheduled sleep offset
+            # find next positive Spn
+            # print unit[0].pointer
+            indof8 = unit[0].pointer
+            # print indof8
+            # print columns['WPSP'][unit[0].pointer]
+            while True:
+                indof8 += 1
+                if columns['WPSP'][indof8] > 0:
+                    unit[0].resetData(int(columns['sleepstate'][indof8]),indof8)
+                    break
+            
+                
+                # print unit[0].pointer
+                # print unit[0].value
+
+        newU = func.getDataValue(unit)
+
+
+    
+            # if columns['WPSP'][unit[0].pointer+1] > 0
+                
+                # update Data -> unit
+            # print columns['WPSP'][unit[0].pointer+1]
+            # print columns['WPSP'][unit[0].pointer+1]
+  
