@@ -20,6 +20,7 @@ def getLat(L, sleepstate):
       return "."
     else:
       if 0 in L[:lat]:
+        # return "unscored"
         return "."
       else:
         return lat/2.0
@@ -113,7 +114,6 @@ def getFinalWake(L):
       elif j==5:
         return count/2.0
         
-
 # getting the time of 9 minus time of 8-0.5 min
 # input: a list of sleep states
 # output: float (minutes)
@@ -141,7 +141,20 @@ def SleepStageB4FinalWake(L):
   sleep = [1,2,3,4,6]
   has9 = False
   has5 = False
-  for sleepstage in reversed(L):
+
+  # first handle cases where the last slp stage is NOT 9
+  if L[-1]!=9:
+    for sleepstage in reversed(L):
+          
+      if has5:
+        if sleepstage in sleep:
+          return sleepstage
+      if sleepstage==5:
+        has5 = True
+
+  else: # then hanle case where the last slp is 9  
+    for sleepstage in reversed(L):
+          
       if has9 and has5:
         if sleepstage in sleep:
           return sleepstage

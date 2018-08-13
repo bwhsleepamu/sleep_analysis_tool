@@ -35,8 +35,9 @@ class Data(object):
         self.pointer = pointer    
 
 # multiple files:
-# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180802/"
-inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
+inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180802_ready/"
+# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
+# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_ready/"
 csv_files = glob.glob(inputpath+"*.csv")
 
 ### testing file: 
@@ -138,11 +139,15 @@ for filename in csv_files:
         adict["latS1"].append(func.getLat(newU, 1))
         adict["latS2"].append(func.getLat(newU, 2))
         adict["latREM"].append(func.getLat(newU, 6))
-        # checking if 3 appears before 4        
-        if func.getLat(unit, 3)<=func.getLat(newU, 4):
-          adict["latSWS"].append(func.getLat(newU, 3))
+        
+        if func.getLat(newU, 3)=="." or func.getLat(newU, 4)==".":
+            adict["latSWS"].append(".")
         else:
-          adict["latSWS"].append(func.getLat(unit, 4)) 
+            # checking if 3 appears before 4        
+            if func.getLat(newU, 3)<=func.getLat(newU, 4):
+                adict["latSWS"].append(func.getLat(newU, 3))
+            else:
+                adict["latSWS"].append(func.getLat(newU, 4)) 
 
         p = func.getPS(newU) # index of onset of PS
         if not p:
@@ -150,7 +155,10 @@ for filename in csv_files:
           adict["latPersistSLeep"].append(index)
         else:
           index = p[1]
-          adict["latPersistSLeep"].append(index/2.0)
+          if 0 in newU[:index]:
+            adict["latPersistSLeep"].append(".")
+          else:           
+            adict["latPersistSLeep"].append(index/2.0)
 
         adict["S1"].append(func.getCount(newU)[0])
         adict["S2"].append(func.getCount(newU)[1])
@@ -162,7 +170,7 @@ for filename in csv_files:
         adict["WAPSO"].append(func.countWake(newU, index))
 
         adict["FinalWake"].append(func.getFinalWake(newU))
-        # get NWake: second parameter is wake time of 1, 2, or 5 minuites
+        # get NWake: second parameter is wake time of 1, 2, or 5 minutes
         adict["NWake_1"].append(func.getNWake(newU,1))
         adict["NWake_2"].append(func.getNWake(newU,2))
         adict["NWake_5"].append(func.getNWake(newU,5))
@@ -176,6 +184,7 @@ for filename in csv_files:
           adict["LastSlp"].append(lastslp)
         
         lastslpfw = func.SleepStageB4FinalWake(newU)
+        # is the following neccessary??
         if lastslpfw == None:
           adict["LastSlp_before_finalwake"].append(".")           
         else:

@@ -4,8 +4,9 @@ from collections import OrderedDict
 import csv
 import time
 # folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627/data_all/output_20180713-144743/"
-folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_2/output_20180803-140322/"
-inputfile = folderpath + "output_unfilled_part2.csv"
+# folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_ready/output_20180813-134959/"
+folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180802_ready/output_20180813-144501/"
+inputfile = folderpath + "output_unfilled.csv"
 
 
 # D is a dictionary to hold all the rows
@@ -18,7 +19,7 @@ sublist = []
 
 with open(inputfile, 'r') as f:
   # skipping the first line which is the header
-  # next(f)
+  next(f)
   # read each line of file
   for line in f:
     # get a list out of each row
@@ -48,7 +49,7 @@ for x in sublist:
 ##print D['3319GX']
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
-with open(folderpath + timestr + "_" + "output_filled_part2.csv", 'wb') as out:
+with open(folderpath + timestr + "_" + "output_filled.csv", 'wb') as out:
      
     for x in sublist:
       for row in D[x]:

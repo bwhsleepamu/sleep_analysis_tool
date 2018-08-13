@@ -3,9 +3,20 @@
 To analyze sleep stage data and beyond
 
 1. findproblem.py
+   change folder path
 2. read.py
+   chnage folder path
 3. check_dup.py
+   change folder path
+   uncomment next(f)
 4. fill.py
+   change folder path
+   inputfile name and outputfile name
+   uncomment next(f)
+   (split inputfile in some occasions)
+
+    split output_unfilled.csv to 2-3 parts
+    keep updating inputfile name (line 7)
 
 
     If there is a 0 (unscorable) between lights out or start time of sleep episode and a stage of sleep, 
