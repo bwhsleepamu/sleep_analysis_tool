@@ -82,4 +82,3 @@ def lastFunction(L):
 
 # print getFinalWake(L)
 
-print lastFunction(L)
