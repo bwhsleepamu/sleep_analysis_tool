@@ -35,7 +35,9 @@ class Data(object):
         self.pointer = pointer 
 
 # multiple files:
-inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
+# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
+inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180905/eight to ten data/"
+# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180905/test/"
 csv_files = glob.glob(inputpath+"*.csv")
 
 # dictionary for the final output
@@ -69,28 +71,39 @@ for filename in csv_files:
 
     # convert list of string to list of integers
     WPSP = list(map(int, WPSP))
-    sleepstate = list(map(int, sleepstate))
+    # print sleepstate[:100]
+    # sleepstate = list(map(int, sleepstate))
+
+
+    for item in sleepstate:
+        try:
+            int(item)
+        except:
+            print item
+
+    sleepstate = map(int, sleepstate)
+
 
     ind8 = [i for i, x in enumerate(sleepstate) if x == 8]
     ind9 = [i for i, x in enumerate(sleepstate) if x == 9]
 
-#     if len(ind8) != len(ind9):
-#         # # print os.path.basename(filename)
-#         print os.path.basename(filename) + " with lights  out/on issue" 
-#         print ind8
-#         print ind9
-#     else:
-# # #        print filename
-# #    for a,b in zip(ind8,ind9):
-# #        if a>b:
-# #          print filename
-# #          break
+    if len(ind8) != len(ind9):
+        # # print os.path.basename(filename)
+        print os.path.basename(filename) + " with lights  out/on issue" 
+        print ind8
+        print ind9
+    else:
+###    #    print filename
+###    for a,b in zip(ind8,ind9):
+###        if a>b:
+###          print filename
+###          break
        
-#        for a,b in zip(ind8,ind9):
-#            if a>b:
-#                print filename
-#                print a,b
-#                print WPSP[a], WPSP[b]
+       for a,b in zip(ind8,ind9):
+           if a>b:
+               print filename+" ***"
+               print a,b
+               print WPSP[a], WPSP[b]
 
 ##            else:
 ##              print  
@@ -100,7 +113,3 @@ for filename in csv_files:
 #               print WPSP[a], WPSP[b]
 #            prevb = b
 #                          
-       
-#    print filename
-#    print ind8
-#    print ind9

@@ -5,7 +5,7 @@ To analyze sleep stage data and beyond
 1. findproblem.py
    - change folder path
 2. read.py
-   - chnage folder path
+   - change folder path
 3. check_dup.py
    - change folder path
    - uncomment next(f)

@@ -51,7 +51,6 @@ if not os.path.exists(outputpath):
 
 
 
-
 # dictionary for the final output
 adict = OrderedDict()
 
