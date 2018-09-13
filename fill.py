@@ -5,7 +5,7 @@ import csv
 import time
 # folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627/data_all/output_20180713-144743/"
 # folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_ready/output_20180813-134959/"
-folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180802_ready/output_20180813-144501/"
+folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180905_ready/output_20180912-161805/"
 inputfile = folderpath + "output_unfilled.csv"
 
 
@@ -19,7 +19,7 @@ sublist = []
 
 with open(inputfile, 'r') as f:
   # skipping the first line which is the header
-  next(f)
+  header = next(f)
   # read each line of file
   for line in f:
     # get a list out of each row
@@ -50,7 +50,7 @@ for x in sublist:
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
 with open(folderpath + timestr + "_" + "output_filled.csv", 'wb') as out:
-     
+    out.write(header) 
     for x in sublist:
       for row in D[x]:
         

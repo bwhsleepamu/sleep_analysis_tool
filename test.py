@@ -31,18 +31,7 @@ class Data(object):
         self.value = value
         self.pointer = pointer   
 
-def getLat(L, sleepstate):
-    
-    lat = next((L.index(i) for i in L if i==sleepstate), None)
-    if lat is None:
-      return "."
-    else:
-      if 0 in L[:lat]:
-        return "."
-      else:
-        return lat/2.0
 
-L = [2,5,2,2,0,3,3,3,4,1,3,3,3,3]
 
 # getting the time of sleep (12346) uninterrupted by first wake(5) before 9
 # input: a list of sleep states
@@ -80,5 +69,20 @@ def lastFunction(L):
       elif sleepstage==5:
         has5 = True
 
-# print getFinalWake(L)
+
+def getLat(L, sleepstate):
+    
+    lat = next((L.index(i) for i in L if i==sleepstate), None)
+    if lat is None:
+      return "."
+    else:
+      if 0 in L[:lat]:
+        # return "unscored"
+        return "."
+      else:
+        return lat/2.0
+
+L = [2,2,2,2,2,2,2,2,2,2,3]
+print getLat(L, 3)
+
 

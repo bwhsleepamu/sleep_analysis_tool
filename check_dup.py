@@ -4,7 +4,7 @@ from collections import OrderedDict
 import csv
 #folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627/data_all/output_20180713-144743/"
 # folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_ready/output_20180813-134959/"
-folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180802_ready/output_20180813-144501/"
+folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180905_ready/output_20180912-161805/"
 inputfile = folderpath + "output_unfilled.csv"
 
 
@@ -52,3 +52,4 @@ for x in sublist:
 
           
 
+print "next step: fill.py"

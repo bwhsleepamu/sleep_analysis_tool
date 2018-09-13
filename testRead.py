@@ -35,10 +35,9 @@ class Data(object):
         self.pointer = pointer    
 
 # multiple files:
-
-# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
+### inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180802_ready/"
+inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_ready/"
-inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180905_ready/"
 csv_files = glob.glob(inputpath+"*.csv")
 
 ### testing file: 
@@ -49,7 +48,6 @@ timestr = time.strftime("%Y%m%d-%H%M%S")
 outputpath =  inputpath + "output_" + timestr + "/"
 if not os.path.exists(outputpath):
     os.makedirs(outputpath)
-
 
 
 # dictionary for the final output
@@ -135,12 +133,12 @@ for filename in csv_files:
 #        adict["SPn"].append(abs(int(columns['WPSP'][unit[0].pointer])))
 #        if int(columns['WPSP'][unit[1].pointer]) <0:
 #          print columns['subject'][unit[1].pointer], int(columns['WPSP'][unit[1].pointer])
-        adict["SPn"].append(abs(int(columns['WPSP'][unit[0].pointer])))
+        spnvalue = abs(int(columns['WPSP'][unit[0].pointer]))
+        adict["SPn"].append(spnvalue)
         adict["latS1"].append(func.getLat(newU, 1))
         adict["latS2"].append(func.getLat(newU, 2))
         adict["latREM"].append(func.getLat(newU, 6))
         
-        # latSWS
         if func.getLat(newU, 3)!="." and func.getLat(newU, 4)==".":
             adict["latSWS"].append(func.getLat(newU, 3))
 
@@ -201,6 +199,4 @@ with open(outputpath + "output_unfilled.csv", "wb") as outfile:
     export_data = zip_longest(*adict.values(), fillvalue = "")
     writer.writerows(export_data)
 
-print "next step: check_dup.py"
-print outputpath
 
