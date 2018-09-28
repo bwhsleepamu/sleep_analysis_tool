@@ -3,7 +3,7 @@
 To analyze sleep stage data and beyond
 
 1. findproblem.py
-   - change folder path
+   - change folder path (1 line)
 2. read.py
    - change folder path
 3. check_dup.py
