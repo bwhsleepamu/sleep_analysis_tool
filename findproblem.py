@@ -34,6 +34,12 @@ class Data(object):
         self.value = value
         self.pointer = pointer 
 
+# write line to file       
+def writeline(line):
+    filepath = '/home/pwm4/Desktop/cg342/sleepprogram_redo/20180926/trash.txt'
+    with open(filepath, 'a') as out:
+        out.write(line+"\n")
+        
 # multiple files:
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
 inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects/"
@@ -89,9 +95,9 @@ for filename in csv_files:
 
     if len(ind8) != len(ind9):
         # # print os.path.basename(filename)
-        print os.path.basename(filename) + " with lights  out/on issue" 
-        print ind8
-        print ind9
+        writeline(os.path.basename(filename) + " with lights  out/on issue")
+        writeline(str(ind8))
+        writeline(str(ind9))
     else:
 ###    #    print filename
 ###    for a,b in zip(ind8,ind9):
@@ -101,9 +107,9 @@ for filename in csv_files:
        
        for a,b in zip(ind8,ind9):
            if a>b:
-               print filename+" ***"
-               print a,b
-               print WPSP[a], WPSP[b]
+               writeline(filename+" unmatching 8 or 9")
+               writeline(a+", "+b)
+               writeline(WPSP[a]+", "+ WPSP[b])
 
 ##            else:
 ##              print  
@@ -112,4 +118,5 @@ for filename in csv_files:
 #               print a, b
 #               print WPSP[a], WPSP[b]
 #            prevb = b
-#                          
+#                   
+# 

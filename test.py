@@ -82,7 +82,11 @@ def getLat(L, sleepstate):
       else:
         return lat/2.0
 
-L = [5,5,5,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3]
-print getLat(L, 3)
+# L = [5,5,5,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,3]
+# print getLat(L, 3)
 
+a = dict()
 
+a['1'] = 1
+if a.has_key('2'):
+      print "hh"

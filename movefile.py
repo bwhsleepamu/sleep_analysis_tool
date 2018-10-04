@@ -49,10 +49,10 @@ def getandcopy(L):
         if os.path.exists(path):
             for fname in os.listdir(path):
 
-                if fname.endswith('.01.csv'):
+                if fname.endswith('.01.csv') and 'bout' not in fname:
                     hasit = 1
-                    print path+fname
-                    copyfile(path+fname)
+                    print path + fname
+                    copyfile(path + fname)
             if hasit == 0:
                 print sub
         else:
@@ -66,4 +66,4 @@ def copyfile(path):
 
 
 l = read_desired_subjects()
-getandcopy(l)
+getandcopy(l) 
