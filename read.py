@@ -38,7 +38,7 @@ class Data(object):
 
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_ready/"
-inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180905_ready/"
+inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/"
 csv_files = glob.glob(inputpath+"*.csv")
 
 ### testing file: 
