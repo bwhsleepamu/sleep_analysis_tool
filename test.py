@@ -87,6 +87,7 @@ def getLat(L, sleepstate):
 
 a = dict()
 
-a['1'] = 1
-if a.has_key('2'):
-      print "hh"
+
+l1 = ['a', 'b', 'c','d']
+for a in l1[:-1]:
+  print a
