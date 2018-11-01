@@ -10,6 +10,9 @@ def getDataValue(L):
     return newL
 
 # getting the latS1, latS2, ...
+# which are all calculated from time of 8. If there are missing data
+# between lights out and the first stage of any of those, then use a '.'. 
+# If there are no instances of any of S1, S2, REM, SWS, or PersistSleep, then use '.'
 # input: a list of sleep state, and target sleep state 
 # output: float / "."
 # fixed: return "." if there is 0 in stages
