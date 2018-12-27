@@ -57,7 +57,7 @@ def getCount(L):
     ct1, ct2, ct3, ct4, ctWake, ctRem, ctOther=(0,)*7
     interested = [1,2,3,4,5,6,7,0]
     for i in L:
-      if i in interested:
+      # if i in interested:
         if i==1:
           ct1+=1
         elif i==2:
@@ -70,7 +70,10 @@ def getCount(L):
           ctWake+=1
         elif i==6:
           ctRem+=1
-        elif i==0 or i==7:
+        elif i not in [1,2,3,4,5,6,10,8,9]: # anything that is not 1-6 should be counted as Other
+          if i not in [0,7]:
+                print i
+                print " --> other (edge case)"
           ctOther+=1
     l = [ct1, ct2, ct3, ct4, ctWake, ctRem, ctOther]
     return [x/2.0 for x in l]

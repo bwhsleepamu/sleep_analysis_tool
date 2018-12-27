@@ -65,7 +65,7 @@ for column_name in output_header:
 
 for filename in csv_files:
     # read from files
-#    print filename
+    print(filename + " ")
     with open(filename, 'r') as f:
         columns = defaultdict(list)
         # read rows into a dictionary format
