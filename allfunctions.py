@@ -108,16 +108,16 @@ def getNWake(L, duration):
 
     return wake
 
-# getting the time of sleep (12346) uninterrupted by first wake(5) before 9
+# -> getting the time of wake(5) uninterrupted by sleep (12346) before 9
 # input: a list of sleep states
 # output: float (minutes)
 def getFinalWake(L):
   sleep = [1,2,3,4,6]
   count = 0
   for i,j in enumerate(reversed(L)):
-      if j in sleep:
+      if j == 5:
         count += 1
-      elif j==5:
+      elif j in sleep:
         return count/2.0
         
 # getting the time of 9 minus time of 8-0.5 min

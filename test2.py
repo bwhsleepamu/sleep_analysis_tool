@@ -25,4 +25,18 @@ def getCount(L):
     l = [ct1, ct2, ct3, ct4, ctWake, ctRem, ctOther]
     return [x/2.0 for x in l]
 
-    
+# getting the time of sleep (12346) uninterrupted by first wake(5) before 9
+# -> getting the time of wake(5) uninterrupted by sleep (12346) before 9
+# input: a list of sleep states
+# output: float (minutes)
+def getFinalWake(L):
+  sleep = [1,2,3,4,6]
+  count = 0
+  for i,j in enumerate(reversed(L)):
+      if j == 5:
+        count += 1
+      elif j in sleep:
+        return count/2.0
+        
+L=[1,2,2,5,5,5,1,1,9]
+print getFinalWake(L)

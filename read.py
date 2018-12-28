@@ -1,5 +1,7 @@
 # read.py calls allfunctions.py to read a folder of files
-# and output analysis on sleep stages and other things
+# - reads from a folder of csv file
+# - the output appears within a new folder under inputpath
+# - the output is a csv file with analysis (mainly) on sleep stages
 
 import csv
 from collections import defaultdict
@@ -18,10 +20,10 @@ except ImportError:
     # Python 2
     from itertools import izip_longest as zip_longest
 
+
 # A Data object holds 2 properties:
 # 1. value (str)
 # 2. original position 
-
 class Data(object):
     value=0
     pointer=-1

@@ -5,7 +5,8 @@ import csv
 import time
 
 
-folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/output_20181009-115005/"
+#folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/output_20181009-115005/"
+folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/output_20181228-143436/"
 inputfile = folderpath + "output_unfilled_2.csv"
 
 # D is a dictionary to hold all the rows
