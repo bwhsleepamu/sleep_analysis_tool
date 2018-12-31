@@ -54,4 +54,4 @@ for x in sublist:
           
 
 print "next step: fill.py"
-print "change folderpath as well"
+print "change: folderpath, inputfile"

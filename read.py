@@ -37,7 +37,6 @@ class Data(object):
         self.pointer = pointer    
 
 # multiple files:
-
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_ready/"
 inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/"

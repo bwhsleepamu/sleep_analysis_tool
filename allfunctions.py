@@ -169,6 +169,15 @@ def SleepStageB4FinalWake(L):
       elif sleepstage==5:
         has5 = True
 
+# a function to remove elements by index
+# input: a list of Data, front or end, index number
+# output: a list of Data trimmed
+def resetList(L,frontOrEnd,ind):
+  if frontOrEnd == 0:
+    return L[ind:]
+  elif frontOrEnd == 1:
+    return L[:ind+1]
+          
 
 
 

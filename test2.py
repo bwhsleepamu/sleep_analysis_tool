@@ -38,5 +38,19 @@ def getFinalWake(L):
       elif j in sleep:
         return count/2.0
         
-L=[1,2,2,5,5,5,1,1,9]
-print getFinalWake(L)
+
+
+# a function to remove elements by index
+# input: a list of Data, front or end, index number
+# output: a list of Data trimmed
+def resetList(L,frontOrEnd,ind):
+  if frontOrEnd == 0:
+    return L[ind:]
+  elif frontOrEnd == 1:
+    return L[:ind+1]
+          
+
+L=[0,1,2,3,4,5]
+
+print L[-1]
+print L[-3]
