@@ -1,4 +1,5 @@
-# getting # of minutes of each sleep states between 8 and 9
+import os
+#  getting # of minutes of each sleep states between 8 and 9
 # input: a list of sleep states
 # [S1, S2, S3, ..., Other]        
 def getCount(L):
@@ -48,9 +49,42 @@ def resetList(L,frontOrEnd,ind):
     return L[ind:]
   elif frontOrEnd == 1:
     return L[:ind+1]
-          
 
-L=[0,1,2,3,4,5]
+# getting the # of wake episodes >= 1 minute (2 consec epoch) (int)
+# intput: list of sleep states, duration of 1,2, or 5 minutues
+# output: an integer
+def getNWake(L, duration):
+    wake = 0
+    onset = 0 # onset of wake
+    cont = 0  # continuous count of wake
+    count = 0 # count of bouts
+    # i is index, j is value
+    for i,j in enumerate(L):
+      if j == 5:
+        onset = 1
+        cont += 1
+        if i!=len(L)-1 and L[i+1]!=5 or i==len(L)-1 and onset == 1:
+          onset = 0
+          if cont >= duration*2:
+            count += 1
+          cont = 0
 
-print L[-1]
-print L[-3]
+    return count
+
+
+
+# L = [
+#   5,5,1,
+#   5,5,1,
+#   5,5,1,
+#   5,5,5,1,
+#   5,5,5,5,1,
+#   5,5,5,5,5,1,
+#   5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,1,1,1,1,1,1,1,1,5,1,6,1,5,1,2,1,1,5]
+# print getNWake(L,1)
+# print getNWake(L,2)
+# print getNWake(L,5)
+inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/2408HSlp.01.csv"
+fname = os.path.basename(inputpath)
+subject = fname[:fname.find('Slp')]
+

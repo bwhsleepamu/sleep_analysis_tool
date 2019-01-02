@@ -39,8 +39,8 @@ class Data(object):
 # multiple files:
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_ready/"
-# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/"
-inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20181231_test/"
+inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/"
+# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20181231_test/"
 csv_files = glob.glob(inputpath+"*.csv")
 
 ### testing file: 
@@ -98,12 +98,14 @@ for filename in csv_files:
         slp_list.append(slp_unit) # slp_list: [Data1,Data2, Data3, ...]
         slp_unit=[]
 
-
     # index of each first occured sleep state
     # then calculate latency (/2.0)
     for unit in slp_list:
         unit_start = 0
+        flag1 = 0 # if there is a change in unit
         unit_end = -1
+        flag2 = 0 # if there is a change in unit
+        
         spn = int(columns['WPSP'][unit[0].pointer])
         if spn < 0:
             # replace lights out time with scheduled sleep offset
@@ -112,12 +114,12 @@ for filename in csv_files:
             # print indof8
             # print columns['WPSP'][unit[0].pointer]
             while True:
+                flag1 = 1
                 indof8 += 1
                 unit_start += 1
-                if columns['WPSP'][indof8] > 0:
+                if int(columns['WPSP'][indof8]) > 0:
                     # unit[0].resetData(int(columns['sleepstate'][indof8]),indof8)
                     break
-        # forfinalwake = func.getDataValue(unit)
     
         # checking spn of 9
         spn9 = int(columns['WPSP'][unit[-1].pointer])
@@ -129,16 +131,26 @@ for filename in csv_files:
             # print indof8
             # print columns['WPSP'][unit[0].pointer]
             while True:
+                flag2 = 1
                 indof9 -= 1
                 unit_end -= 1
-                if columns['WPSP'][indof9] > 0:
+
+                if int(columns['WPSP'][indof9]) > 0:
+
                     # unit[-1].resetData(int(columns['sleepstate'][indof9]),indof9)
                     break
         
         # making the Data.value into a new list
         # newU is [8,,,,9] or [5,,,,,9]
-        newU = func.getDataValue(unit[unit_start:unit_end+1])
-
+        if flag1 == 1 and flag2 == 1:
+            newU = func.getDataValue(unit[unit_start:unit_end+1])
+        elif flag2 == 0:
+            newU = func.getDataValue(unit[unit_start:])
+        elif flag1 == 0:
+            newU = func.getDataValue(unit[:unit_end+1])
+        else:
+            newU = func.getDataValue(unit)
+        # print newU
         adict["Subject"].append(columns['subject'][unit[1].pointer])
 #        adict["SPn"].append(abs(int(columns['WPSP'][unit[0].pointer])))
 #        if int(columns['WPSP'][unit[1].pointer]) <0:
@@ -180,8 +192,7 @@ for filename in csv_files:
         adict["REM"].append(func.getCount(newU)[5])
         adict["Other"].append(func.getCount(newU)[6])
         adict["WAPSO"].append(func.countWake(newU, index))
-        # print forfinalwake
-        print newU
+
         adict["FinalWake"].append(func.getFinalWake(newU))
         # get NWake: second parameter is wake time of 1, 2, or 5 minutes
         adict["NWake_1"].append(func.getNWake(newU,1))

@@ -94,7 +94,8 @@ def countWake(L, index):
 def getNWake(L, duration):
     wake = 0
     onset = 0 # onset of wake
-    cont = 0  # continuous
+    cont = 0  # continuous count of wake
+    count = 0 # count of bouts
     # i is index, j is value
     for i,j in enumerate(L):
       if j == 5:
@@ -102,11 +103,11 @@ def getNWake(L, duration):
         cont += 1
         if i!=len(L)-1 and L[i+1]!=5 or i==len(L)-1 and onset == 1:
           onset = 0
-          if cont > duration:
-            wake += cont
+          if cont >= duration*2:
+            count += 1
           cont = 0
 
-    return wake
+    return count
 
 # -> getting the time of wake(5) uninterrupted by sleep (12346) before 9
 # input: a list of sleep states

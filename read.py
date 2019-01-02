@@ -40,6 +40,7 @@ class Data(object):
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_ready/"
 inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/"
+# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20181231_test/"
 csv_files = glob.glob(inputpath+"*.csv")
 
 ### testing file: 
@@ -56,6 +57,7 @@ if not os.path.exists(outputpath):
 # dictionary for the final output
 adict = OrderedDict()
 
+subject_group = []
 output_header = ["Subject","SPn","latS1","latS2","latREM","latSWS","latPersistSLeep","S1",
 "S2","S3","S4","Wake","REM","Other","WAPSO","FinalWake","NWake_1","NWake_2","NWake_5",
 "Lout2Lon","LastSlp","LastSlp_before_finalwake"]
@@ -66,7 +68,16 @@ for column_name in output_header:
 
 for filename in csv_files:
     # read from files
-    print(filename + " ")
+    print filename
+    fname = os.path.basename(filename)
+    subject = fname[:fname.find('Slp')]
+    if subject not in subject_group:
+        subject_group.append(subject)
+    else:
+        print "duplicate subject:"
+        print filename
+        break
+
     with open(filename, 'r') as f:
         columns = defaultdict(list)
         # read rows into a dictionary format
@@ -96,42 +107,60 @@ for filename in csv_files:
         slp_list.append(slp_unit) # slp_list: [Data1,Data2, Data3, ...]
         slp_unit=[]
 
-
     # index of each first occured sleep state
     # then calculate latency (/2.0)
     for unit in slp_list:
+
+        unit_start = 0
+        flag1 = 0 # if there is a change in unit
+        unit_end = -1
+        flag2 = 0 # if there is a change in unit
         
         spn = int(columns['WPSP'][unit[0].pointer])
         if spn < 0:
             # replace lights out time with scheduled sleep offset
             # find next positive Spn
-            indof8 = unit[0].pointer
+            indof8 = unit[unit_start].pointer
             # print indof8
             # print columns['WPSP'][unit[0].pointer]
             while True:
+                flag1 = 1
                 indof8 += 1
-                if columns['WPSP'][indof8] > 0:
-                    unit[0].resetData(int(columns['sleepstate'][indof8]),indof8)
+                unit_start += 1
+                if int(columns['WPSP'][indof8]) > 0:
+                    # unit[0].resetData(int(columns['sleepstate'][indof8]),indof8)
                     break
+    
         # checking spn of 9
         spn9 = int(columns['WPSP'][unit[-1].pointer])
         if spn9 < 0:
             # replace lights out time with scheduled sleep offset
             # find next positive Spn
             # print unit[0].pointer
-            indof9 = unit[-1].pointer
+            indof9 = unit[unit_end].pointer
             # print indof8
             # print columns['WPSP'][unit[0].pointer]
             while True:
+                flag2 = 1
                 indof9 -= 1
-                if columns['WPSP'][indof9] > 0:
-                    unit[-1].resetData(int(columns['sleepstate'][indof9]),indof9)
-                    break
+                unit_end -= 1
 
+                if int(columns['WPSP'][indof9]) > 0:
+
+                    # unit[-1].resetData(int(columns['sleepstate'][indof9]),indof9)
+                    break
+        
         # making the Data.value into a new list
         # newU is [8,,,,9] or [5,,,,,9]
-        newU = func.getDataValue(unit)
-
+        if flag1 == 1 and flag2 == 1:
+            newU = func.getDataValue(unit[unit_start:unit_end+1])
+        elif flag2 == 0:
+            newU = func.getDataValue(unit[unit_start:])
+        elif flag1 == 0:
+            newU = func.getDataValue(unit[:unit_end+1])
+        else:
+            newU = func.getDataValue(unit)
+        # print newU
         adict["Subject"].append(columns['subject'][unit[1].pointer])
 #        adict["SPn"].append(abs(int(columns['WPSP'][unit[0].pointer])))
 #        if int(columns['WPSP'][unit[1].pointer]) <0:
