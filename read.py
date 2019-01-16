@@ -101,7 +101,7 @@ for filename in csv_files:
     ind8 = [i for i, x in enumerate(sleepstate) if x == 8]
     ind9 = [i for i, x in enumerate(sleepstate) if x == 9]
     
-    for a,b in zip(ind8,ind9):
+    for a,b in zip(ind8,ind9): #consider izip?
         for i in range(a,b+1):
           slp_unit.append(Data(sleepstate[i], i)) # appending sleep stages
         slp_list.append(slp_unit) # slp_list: [Data1,Data2, Data3, ...]
