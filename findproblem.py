@@ -43,6 +43,7 @@ class Data(object):
 # multiple files:
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
 inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/"
+inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20190320_anotherstudy_pre/"
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180905/test/"
 csv_files = glob.glob(inputpath+"*.csv")
 

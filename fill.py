@@ -8,8 +8,10 @@ import time
 #folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/output_20181009-115005/"
 # folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/output_20181228-143436/"
 # folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/output_20181231-160450/"
-folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/output_20190102-154301/"
-inputfile = folderpath + "output_unfilled_2.csv"
+# folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/output_20190102-154301/"
+folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20190320_anotherstudy_pre/output_20190322-115016/"
+
+inputfile = folderpath + "output_unfilled.csv"
 
 # D is a dictionary to hold all the rows
 # key: subject code values: list of lists
@@ -52,7 +54,7 @@ for x in sublist:
 ##print D['3319GX']
 
 timestr = time.strftime("%Y%m%d-%H%M%S")
-with open(folderpath + timestr + "_" + "output_filled_2.csv", 'wb') as out:
+with open(folderpath + timestr + "_" + "output_filled.csv", 'wb') as out:
     out.write(header) 
     for x in sublist:
       for row in D[x]:

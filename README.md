@@ -15,7 +15,7 @@ To analyze sleep stage data and beyond
    - uncomment next(f)
    - (split inputfile in some occasions)
    - split output_unfilled.csv to 2-3 parts
-   - keep updating inputfile name (line 7)
+   - keep updating inputfile name
 
 
 

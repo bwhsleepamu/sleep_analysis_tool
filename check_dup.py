@@ -7,7 +7,8 @@ import csv
 #folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/output_20181009-115005/"
 # folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/output_20181228-143436/"
 # folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/output_20181231-160450/"
-folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/output_20190102-154301/"
+#folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/output_20190102-154301/"
+folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20190320_anotherstudy_pre/output_20190322-115016/"
 inputfile = folderpath + "output_unfilled.csv"
 
 
