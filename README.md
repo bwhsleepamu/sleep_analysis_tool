@@ -2,12 +2,12 @@
 
 To analyze sleep stage data and beyond
 
-1. findproblem.py
+1. findproblem.py/preprocessing.py
    - change folder path (1 line)
 2. read.py
    - change folder path
 3. check_dup.py
-   - change folder path
+   - schange folder path
    - uncomment next(f)
 4. fill.py
    - change folder path
