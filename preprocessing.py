@@ -42,7 +42,7 @@ class Data(object):
         
 # multiple files:
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
-inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/"
+#inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/"
 inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20190320_anotherstudy_pre/"
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180905/test/"
 csv_files = glob.glob(inputpath+"*.csv")
@@ -112,7 +112,7 @@ for filename in csv_files:
             #    writeline(filename+" unmatching 8 or 9")
             #    writeline(a+", "+b)
             #    writeline(WPSP[a]+", "+ WPSP[b])
-                print filename + " unmatching 8 and 9"
+                print filename + " unmatching 8 and 9"  
 
     for a,b in zip(ind8,ind9):
         for i in range(a,b+1):
