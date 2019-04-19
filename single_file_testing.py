@@ -36,12 +36,8 @@ class Data(object):
         self.value = value
         self.pointer = pointer    
 
-# multiple files:
-# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
-# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180627_ready/"
-# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/"
-inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20190419_ready/"
-# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20181231_test/"
+
+inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20190419/test/"
 csv_files = glob.glob(inputpath+"*.csv")
 
 ### testing file: 
@@ -116,7 +112,10 @@ for filename in csv_files:
         unit_end = -1
         flag2 = 0 # if there is a change in unit
         
-        spn = int(columns['WPSP'][unit[0].pointer])
+        try:
+            spn = int(columns['WPSP'][unit[0].pointer])
+        except:
+            print spn
         if spn < 0:
             # replace lights out time with scheduled sleep offset
             # find next positive Spn
@@ -160,7 +159,7 @@ for filename in csv_files:
             newU = func.getDataValue(unit[:unit_end+1])
         else:
             newU = func.getDataValue(unit)
-        # print newU
+        print newU
         adict["Subject"].append(columns['subject'][unit[1].pointer])
 #        adict["SPn"].append(abs(int(columns['WPSP'][unit[0].pointer])))
 #        if int(columns['WPSP'][unit[1].pointer]) <0:
@@ -203,7 +202,10 @@ for filename in csv_files:
         adict["Other"].append(func.getCount(newU)[6])
         adict["WAPSO"].append(func.countWake(newU, index))
 
-        adict["FinalWake"].append(func.getFinalWake(newU))
+        try:
+            adict["FinalWake"].append(func.getFinalWake(newU))
+        except:
+            print spn
         # get NWake: second parameter is wake time of 1, 2, or 5 minutes
         adict["NWake_1"].append(func.getNWake(newU,1))
         adict["NWake_2"].append(func.getNWake(newU,2))
@@ -217,10 +219,7 @@ for filename in csv_files:
         else:
           adict["LastSlp"].append(lastslp)
         
-        try:
-            lastslpfw = func.SleepStageB4FinalWake(newU)
-        except:
-            print "error: "+filename
+        lastslpfw = func.SleepStageB4FinalWake(newU)
         # is the following neccessary??
         if lastslpfw == None:
           adict["LastSlp_before_finalwake"].append(".")           

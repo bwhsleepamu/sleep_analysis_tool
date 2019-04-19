@@ -43,8 +43,9 @@ class Data(object):
 # multiple files:
 # inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
 #inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/"
-inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20190320_anotherstudy_pre/"
-# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180905/test/"
+#inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20190320_anotherstudy_pre/"
+inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20190419_ready/"
+
 csv_files = glob.glob(inputpath+"*.csv")
 
 # dictionary for the final output
@@ -59,7 +60,6 @@ for column_name in output_header:
 
 for filename in csv_files:
     # read from files
-    print filename
     with open(filename, 'r') as f:
         columns = defaultdict(list)
         # read rows into a dictionary format
@@ -182,3 +182,4 @@ for filename in csv_files:
         except:
             print "out of bound between lights out and lights on"
             print spn
+    print filename
