@@ -119,7 +119,10 @@ def getFinalWake(L):
       if j == 5:
         count += 1
       elif j in sleep:
-        return count/2.0
+        if count/2.0 == 0:
+            return "."
+        else:
+            return count/2.0
         
 # getting the time of 9 minus time of 8-0.5 min
 # input: a list of sleep states
