@@ -119,10 +119,7 @@ def getFinalWake(L):
       if j == 5:
         count += 1
       elif j in sleep:
-        if count/2.0 == 0:
-            return "."
-        else:
-            return count/2.0
+          return count/2.0
         
 # getting the time of 9 minus time of 8-0.5 min
 # input: a list of sleep states
@@ -181,7 +178,13 @@ def resetList(L,frontOrEnd,ind):
     return L[ind:]
   elif frontOrEnd == 1:
     return L[:ind+1]
-          
 
-
+# to get path from user
+# output: a path (string)          
+def getInput():
+    
+    pathname = raw_input("Enter a path: ")
+    if not pathname.endswith("/"):
+        pathname += "/"
+    return pathname
 
