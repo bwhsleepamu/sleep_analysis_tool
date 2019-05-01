@@ -34,16 +34,6 @@ class Data(object):
         self.value = value
         self.pointer = pointer 
 
-# # write line to file       
-# def writeline(line):
-#     filepath = '/home/pwm4/Desktop/cg342/sleepprogram_redo/20180926/trash.txt'
-#     with open(filepath, 'a') as out:
-#         out.write(line+"\n")
-        
-# multiple files:
-# inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/testing/"
-#inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20180925_allsubjects_ready/"
-#inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20190320_anotherstudy_pre/"
 inputpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20190419_ready/"
 
 csv_files = glob.glob(inputpath+"*.csv")
