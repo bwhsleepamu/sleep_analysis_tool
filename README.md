@@ -1,25 +1,24 @@
 # Sleep Analysis Tool
 
 To analyze sleep stage data and beyond
-
-1. findproblem.py/preprocessing.py
-   - change folder path (1 line)
+0. sleep_analysis.py
+1. preprocessing.py
 2. read.py
-   - change folder path
 3. check_dup.py
-   - change folder path
-   - uncomment next(f)
 4. fill.py
-   - change folder path
-   - inputfile name and outputfile name
-   - uncomment next(f)
-   - (split inputfile in some occasions)
-   - split output_unfilled.csv to 2-3 parts
-   - keep updating inputfile name
+
+__Running on Windows__
+
+open command line:  Start menu -> Run  and type cmd
+```
+$ C:\python27\python.exe 
+$ Z:\code\hw01\script.py
+Or if your system is configured correctly, you can drag and drop your script from Explorer onto the Command Line window and press enter.
+```
 
 
 
-__Three issues:__
+__Three issues (Resolved):__
 
 - [x] If there is a 0 (unscorable) between lights out or start time of sleep episode and a stage of sleep, then you cannot compute sleep latency
 
