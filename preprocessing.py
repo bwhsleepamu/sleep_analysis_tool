@@ -54,12 +54,9 @@ def preprocess(inputpath):
             columns = defaultdict(list)
             # read rows into a dictionary format
             reader = csv.DictReader(f,  fieldnames=['subject', 'WPSP', 'labtime', 'sleepstate']) 
-            try:
-                for row in reader: # read a row as {column1: value1, column2: value2,...}
+            for row in reader: # read a row as {column1: value1, column2: value2,...}
                     for (k,v) in row.items(): # go over each column name and value 
                         columns[k].append(v)
-            except:
-                print("error: " + filename)
 
         WPSP = columns['WPSP']
         sleepstate = columns['sleepstate']
@@ -77,6 +74,7 @@ def preprocess(inputpath):
                 int(item)
             except:
                 print item
+                raise
 
         sleepstate = map(int, sleepstate)
 
@@ -86,12 +84,14 @@ def preprocess(inputpath):
 
         if len(ind8) != len(ind9):
             print filename + " unequal number of 8 and 9"
+            raise 
         else:
 
         
             for a,b in zip(ind8,ind9):
                 if a>b:
-                    print filename + " unmatching 8 and 9"  
+                    print filename + " unmatching 8 and 9"
+                    raise
 
         for a,b in zip(ind8,ind9):
             for i in range(a,b+1):
@@ -115,6 +115,7 @@ def preprocess(inputpath):
 
                 print "very short sleep stage list, spn of 8 is:"
                 print spn
+                raise
             try:
                 if spn < 0:
                     # replace lights out time with scheduled sleep offset
@@ -161,4 +162,5 @@ def preprocess(inputpath):
             except:
                 print "out of bound between lights out and lights on"
                 print spn
+                raise
         print filename

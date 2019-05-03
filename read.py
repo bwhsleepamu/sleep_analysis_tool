@@ -82,7 +82,9 @@ def analyze(inputpath):
                     for (k,v) in row.items(): # go over each column name and value 
                         columns[k].append(v)
             except:
-                print("error: " + filename)
+                print("Reading error: " + filename)
+                raise
+
 
         WPSP = columns['WPSP']
         sleepstate = columns['sleepstate']
@@ -218,8 +220,10 @@ def analyze(inputpath):
             try:
                 lastslpfw = func.SleepStageB4FinalWake(newU)
             except:
-                print "error: "+filename
-            # is the following neccessary??
+                print "slp_stage_b4_finalwake error: "+filename
+                print spn
+                raise
+            
             if lastslpfw == None:
                 adict["LastSlp_before_finalwake"].append(".")           
             else:

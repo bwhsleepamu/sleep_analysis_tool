@@ -128,7 +128,7 @@ def getLout2Lon(L):
   a = (len(L)-1)/2.0/60 # fixed -> from minutes to hours
   return round(a,2)
 
-# first extra column
+# second last column
 # sleep stage for the epoch just before each 9
 # input: a list of sleep states
 # output: int, sleep stage
@@ -138,7 +138,7 @@ def SleepStageB49(L):
       if sleepstage in sleep:
         return sleepstage
 
-# second extra column
+# last column
 # the sleep stage for the epoch just before Final wake starts 
 # (so the last non-5 or 9 epoch)
 # input: a list of sleep stages
@@ -149,7 +149,7 @@ def SleepStageB4FinalWake(L):
   has9 = False
   has5 = False
 
-  # first handle cases where the last slp stage is NOT 9
+  # where the last slp stage is NOT 9
   if L[-1]!=9:
     for sleepstage in reversed(L):
           
@@ -159,7 +159,7 @@ def SleepStageB4FinalWake(L):
       if sleepstage==5:
         has5 = True
 
-  else: # then hanle case where the last slp is 9  
+  else: # where the last slp is 9  
     for sleepstage in reversed(L):
           
       if has9 and has5:
