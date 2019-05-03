@@ -1,6 +1,7 @@
 # Sleep Analysis Tool
 
 To analyze sleep stage data and beyond
+
 0. sleep_analysis.py
 1. preprocessing.py
 2. read.py
@@ -13,8 +14,9 @@ open command line:  Start menu -> Run  and type cmd
 ```
 $ C:\python27\python.exe 
 $ Z:\code\hw01\script.py
-Or if your system is configured correctly, you can drag and drop your script from Explorer onto the Command Line window and press enter.
 ```
+
+Or if your system is configured correctly, you can drag and drop your script from Explorer onto the Command Line window and press enter.
 
 
 
