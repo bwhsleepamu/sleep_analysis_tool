@@ -85,9 +85,7 @@ def preprocess(inputpath):
         if len(ind8) != len(ind9):
             print filename + " unequal number of 8 and 9"
             raise 
-        else:
-
-        
+        else:        
             for a,b in zip(ind8,ind9):
                 if a>b:
                     print filename + " unmatching 8 and 9"
@@ -95,12 +93,12 @@ def preprocess(inputpath):
 
         for a,b in zip(ind8,ind9):
             for i in range(a,b+1):
+                # slp_unit: [Data1, Data2, Data3, ...]
                 slp_unit.append(Data(sleepstate[i], i)) # appending sleep stages
-            slp_list.append(slp_unit) # slp_list: [Data1,Data2, Data3, ...]
+            slp_list.append(slp_unit) # slp_list:[[d1, d2, ...],[d10, d11, ...], ...]
             slp_unit=[]
         
         for unit in slp_list:
-
 
             unit_start = 0
             flag1 = 0 # if there is a change in unit
@@ -111,6 +109,7 @@ def preprocess(inputpath):
             spn = int(columns['WPSP'][unit[0].pointer])
             # checking spn of 9
             spn9 = int(columns['WPSP'][unit[-1].pointer])
+
             if len(unit)<10:
 
                 print "very short sleep stage list, spn of 8 is:"
@@ -131,7 +130,6 @@ def preprocess(inputpath):
                             # unit[0].resetData(int(columns['sleepstate'][indof8]),indof8)
                             break
             
-
                 if spn9 < 0:
                     # replace lights out time with scheduled sleep offset
                     # find next positive Spn

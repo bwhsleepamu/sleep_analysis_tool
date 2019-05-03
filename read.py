@@ -104,9 +104,17 @@ def analyze(inputpath):
             slp_list.append(slp_unit) # slp_list: [Data1,Data2, Data3, ...]
             slp_unit=[]
 
+        slp_list2 = []
+        for unit in slp_list:
+            # spnlist = [-1, -1, -1, 1, 1,...]
+            spnlist = map(int, columns['WPSP'][unit[0].pointer:unit[-1].pointer])
+
+            if any(spns > 0 for spns in spnlist):
+                slp_list2.append(unit)
+
         # index of each first occured sleep state
         # then calculate latency (/2.0)
-        for unit in slp_list:
+        for unit in slp_list2:
 
             unit_start = 0
             flag1 = 0 # if there is a change in unit
