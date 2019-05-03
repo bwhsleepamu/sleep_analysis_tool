@@ -83,12 +83,12 @@ def preprocess(inputpath):
         ind9 = [i for i, x in enumerate(sleepstate) if x == 9]
 
         if len(ind8) != len(ind9):
-            print filename + " unequal number of 8 and 9"
+            print "Unequal number of 8 and 9 error: \n" + filename + "\n"
             raise 
         else:        
             for a,b in zip(ind8,ind9):
                 if a>b:
-                    print filename + " unmatching 8 and 9"
+                    print "Unmatching 8 and 9 error: \n" + filename + "\n"
                     raise
 
         for a,b in zip(ind8,ind9):
@@ -112,8 +112,8 @@ def preprocess(inputpath):
 
             if len(unit)<10:
 
-                print "very short sleep stage list, spn of 8 is:"
-                print spn
+                print "very short sleep stage list, spn of 8 is:\n"
+                print spn + "\n"
                 raise
             try:
                 if spn < 0:
