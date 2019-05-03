@@ -4,9 +4,6 @@ from collections import OrderedDict
 import csv
 import time
 
-
-#folderpath = "/home/pwm4/Desktop/cg342/sleepprogram_redo/20190419_ready/output_20190419-153912/"
-
 def fillgap(folderpath):
   inputfile = folderpath + "output_unfilled.csv"
 
@@ -45,10 +42,8 @@ def fillgap(folderpath):
         except:
           print "exception:"
           print val
+          raise
         cur += 1
-        
-
-  ##print D['3319GX']
 
   timestr = time.strftime("%Y%m%d-%H%M%S")
   with open(folderpath + timestr + "_" + "output.csv", 'wb') as out:

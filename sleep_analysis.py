@@ -3,7 +3,7 @@ import read
 import check_dup as dup
 import allfunctions as func
 import fill
-# from func_timeout import func_timeout, FunctionTimedOut
+
 # /home/pwm4/Desktop/cg342/sleepprogram_redo/20190419/test2
 pathname = func.getInput()
 # preprocessing data
@@ -32,7 +32,6 @@ else:
             print "Success: No Duplicates"
             
             try:
-                # fillReturnValue = func.timeout(3, fill.fillgap, args=(outputpath))
                 fill.fillgap(outputpath)
             except: #FunctionTimedOut:
                 # print "Function exceed 3 seconds and was terminated"

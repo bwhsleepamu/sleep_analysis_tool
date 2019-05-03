@@ -39,20 +39,14 @@ class Data(object):
 def analyze(inputpath):
     csv_files = glob.glob(inputpath+"*.csv")
 
-    ### testing file: 
-    #inputpath = "/home/pwm4/Desktop/cg342/sleepprogram/24B7GXT3Slp.01.csv"
-
     # generate output folder
     timestr = time.strftime("%Y%m%d-%H%M%S")
     outputpath =  inputpath + "output_" + timestr + "/"
     if not os.path.exists(outputpath):
         os.makedirs(outputpath)
 
-
-
     # dictionary for the final output
     adict = OrderedDict()
-
     subject_group = []
     output_header = ["Subject","SPn","latS1","latS2","latREM","latSWS","latPersistSLeep","S1",
     "S2","S3","S4","Wake","REM","Other","WAPSO","FinalWake","NWake_1","NWake_2","NWake_5",

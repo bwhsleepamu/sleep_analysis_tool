@@ -78,7 +78,6 @@ def preprocess(inputpath):
 
         sleepstate = map(int, sleepstate)
 
-
         ind8 = [i for i, x in enumerate(sleepstate) if x == 8]
         ind9 = [i for i, x in enumerate(sleepstate) if x == 9]
 
@@ -133,7 +132,6 @@ def preprocess(inputpath):
                 if spn9 < 0:
                     # replace lights out time with scheduled sleep offset
                     # find next positive Spn
-                    # print unit[0].pointer
                     indof9 = unit[unit_end].pointer
                     # print indof8
                     # print columns['WPSP'][unit[0].pointer]
