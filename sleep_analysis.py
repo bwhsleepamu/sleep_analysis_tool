@@ -5,6 +5,7 @@ import allfunctions as func
 import fill
 
 # /home/pwm4/Desktop/cg342/sleepprogram_redo/20190419/test2
+# /home/pwm4/Desktop/cg342/sleepprogram_redo/20190530
 pathname = func.getInput()
 # preprocessing data
 try:
@@ -12,7 +13,7 @@ try:
     print "\n"
     print "Data preprocessing is successful\n"
 except:
-    print "Data preprocessing error!\n"
+    print "\nData preprocessing error!\n"
 else:
     # run analysis
     print "Analyzing ..."

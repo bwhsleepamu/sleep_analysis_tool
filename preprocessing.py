@@ -34,10 +34,21 @@ class Data(object):
         self.value = value
         self.pointer = pointer 
 
+def check8_9(WPSP, ind8, ind9):
+    rg = min(len(ind8), len(ind9))
+    for i in range(rg):
+        # print WPSP[ind9[i]]
+        if WPSP[ind9[i]] < 0: # if index of 9 is neg
+            new9 = abs(WPSP[ind9[i]]) - 1
+        else:
+            new9 = abs(WPSP[ind9[i]])
+        if abs(WPSP[ind8[i]]) != new9:
+            return abs(WPSP[ind8[i]])
+    return "N/A"
+
 def preprocess(inputpath):
 
     csv_files = glob.glob(inputpath+"*.csv")
-
     # dictionary for the final output
     adict = OrderedDict()
 
@@ -81,13 +92,17 @@ def preprocess(inputpath):
         ind8 = [i for i, x in enumerate(sleepstate) if x == 8]
         ind9 = [i for i, x in enumerate(sleepstate) if x == 9]
 
-        if len(ind8) != len(ind9):
+        if len(ind8) != len(ind9): # file has unequal number of 8 and 9
             print "Unequal number of 8 and 9 error: \n" + filename + "\n"
+            print "Issue occured in spn: " 
+            print check8_9(WPSP, ind8, ind9)
             raise 
         else:        
             for a,b in zip(ind8,ind9):
                 if a>b:
                     print "Unmatching 8 and 9 error: \n" + filename + "\n"
+                    print "Issue occured in spn: "
+                    print check8_9(WPSP, ind8, ind9)
                     raise
 
         for a,b in zip(ind8,ind9):
