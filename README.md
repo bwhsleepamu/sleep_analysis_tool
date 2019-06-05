@@ -19,6 +19,11 @@ $ Z:\code\hw01\script.py
 Or if your system is configured correctly, you can drag and drop your script from Explorer onto the Command Line window and press enter.
 
 
+__Running on Linux/Unix__
+
+```$ python sleep_analysis.py```
+
+Enter path to the directory of `.csv` files such as ```/home/pwm4/Desktop/cg342/sleepprogram_redo/20190530```
 
 __Three issues (Resolved):__
 
